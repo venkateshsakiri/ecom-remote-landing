@@ -1,0 +1,91 @@
+<form [formGroup]="productDetailsForm">
+    <div class="card"><span class="block text-900 font-bold text-xl mb-4">Create Product</span>
+        <div class="grid grid-nogutter flex-wrap gap-3 p-fluid">
+            <div class="col-12 lg:col-8">
+                <div class="grid formgrid">
+                    <div class="col-12 field"><input pinputtext="" type="text" formControlName="name" placeholder="Product Name"
+                            label="Product Name" class="p-inputtext p-component p-element"></div>
+                    <div class="col-12 lg:col-4 field">
+                            <p-inputNumber id="price" formControlName="price" placeholder="Price" mode="currency" currency="USD" locale="en-US"></p-inputNumber>
+                    </div>
+                    <div class="col-12 lg:col-4 field"><input pinputtext="" type="text" placeholder="Product Code"
+                            label="Product Code" class="p-inputtext p-component p-element">
+                    </div>
+                    <div class="col-12 lg:col-4 field"><input pinputtext="" type="text" placeholder="Product SKU"
+                            label="SKU" class="p-inputtext p-component p-element"></div>
+                    <div class="col-12 field">
+                        <textarea id="bio" type="text" pinputtextarea="" formControlName="description" placeholder="description" rows="5"
+                            class="p-inputtextarea p-inputtext p-component p-element p-inputtextarea-resizable"
+                            style="height: 109px; overflow: hidden;"></textarea>
+
+                    </div>
+
+                    <div class="col-12 field">
+                        <div class="border-1 surface-border surface-card border-round p-fileupload">
+                            <input type="file" name="demo[]" accept="image/*" style="display: none;"
+                                (change)="onFileSelected($event)" #fileInput multiple>
+                            <div class="p-fileupload-content border-1 surface-border border-round"
+                                (click)="fileInput.click()">
+                                <div class="h-15rem overflow-y-auto py-3 border-round" style="cursor: pointer;">
+                                    <div class="flex flex-column w-full h-full justify-content-center align-items-center">
+                                        <i class="pi pi-file text-4xl text-primary"></i>
+                                        <span class="block font-semibold text-900 text-lg mt-3">Drop or select images</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div *ngIf="selectedImages.length > 0" class="flex flex-wrap gap-2" style="padding-left: 1rem;">
+                        <div *ngFor="let image of selectedImages" class="relative border-2 border-blue-500">
+                            <img [src]="image" alt="Selected Image" class="w-10rem h-10rem border-round">
+                            <button type="button" (click)="removeImage(image)" class="absolute top-0 right-0 p-button p-button-danger p-button-rounded bg-blue-500" style="padding: 0.2rem 0.5rem;">
+                                <i class="pi pi-times text-white" style="font-size: 0.8rem;"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="flex-1 w-full lg:w-3 xl:w-4 flex flex-column row-gap-3">
+                <div class="border-1 surface-border border-round"><span
+                        class="text-900 font-bold block border-bottom-1 surface-border p-3">Publish</span>
+                    <div class="p-3">
+                        <div class="bg-gray-100 py-2 px-3 flex align-items-center border-round">
+                            <span class="text-black-alpha-90 font-bold mr-3">Status:</span><span
+                                class="text-black-alpha-60 font-semibold">Draft</span><button pbutton="" pripple=""
+                                type="button" icon="pi pi-fw pi-pencil"
+                                class="p-element p-ripple p-button-rounded p-button-text text-black-alpha-60 ml-auto p-button p-component p-button-icon-only"><span
+                                    class="p-button-icon pi pi-fw pi-pencil" aria-hidden="true"></span><span class="p-ink"
+                                    aria-hidden="true" role="presentation"></span></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="border-1 surface-border border-round"><span
+                        class="text-900 font-bold block border-bottom-1 surface-border p-3">Category</span>
+                    <div class="p-3">
+                        <p-dropdown inputId="dropdown" [autoDisplayFirst]="false" [options]="categoryList" formControlName="category" placeholder="Select a Category" optionLabel="name"></p-dropdown>
+                    </div>
+                </div>
+
+                <div class="border-1 surface-border border-round"><span
+                        class="text-900 font-bold block border-bottom-1 surface-border p-3">Stock</span>
+                    <div class="p-3">
+                        <p-dropdown id="status" [options]="statuses" optionLabel="label" formControlName="status" placeholder="Select a Status">
+                        </p-dropdown>
+                    </div>
+                </div>
+
+                <div class="flex flex-column sm:flex-row justify-content-between align-items-center gap-3 py-2">
+                    <button pbutton="" pripple="" label="Discard" icon="pi pi-fw pi-trash" class="p-element p-ripple p-button-danger flex-1 p-button-outlined p-button p-component">
+                        <span class="p-button-icon p-button-icon-left pi pi-fw pi-trash" aria-hidden="true"></span><span
+                            class="p-button-label">Discard</span><span class="p-ink" aria-hidden="true"
+                            role="presentation"></span></button>
+                    <button pbutton="" (click)="saveProductDetails()" pripple="" label="Save" icon="pi pi-fw pi-check" class="p-element p-ripple p-button-primary flex-1 border-round p-button p-component"><span
+                            class="p-button-icon p-button-icon-left pi pi-fw pi-check" aria-hidden="true"></span><span
+                            class="p-button-label">Save</span><span class="p-ink" aria-hidden="true"
+                            role="presentation"></span></button></div>
+            </div>
+        </div>
+    </div>
+</form>
+<app-ajax-loader *ngIf="isLoading"></app-ajax-loader>

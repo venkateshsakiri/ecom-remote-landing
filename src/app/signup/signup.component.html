@@ -1,0 +1,34 @@
+<div class="container">
+    <input type="checkbox" id="check">
+    <div class="login form">
+      <header>Login</header>
+      <form [formGroup]="loginForm">
+        <input type="text" placeholder="Enter email or User Name" formControlName="email">
+        <input type="password" placeholder="Enter your password" formControlName="password">
+        <a href="#">Forgot password?</a>
+        <input type="button" class="button" value="Login" (click)="LoginUser()">
+      </form>
+      <div class="signup">
+        <span class="signup">Don't have an account?
+         <label for="check">Signup</label>
+        </span>
+      </div>
+    </div>
+    <div class="registration form">
+      <header>Signup</header>
+      <form [formGroup]="registerForm">
+        <input type="text" placeholder="Enter User Name" formControlName="name">
+        <input type="text" placeholder="Enter your email" formControlName="email">
+        <input type="password" placeholder="Create a password" formControlName="password">
+        <input type="password" placeholder="Confirm your password" formControlName="confirmPassword">
+        <input type="button" class="button" value="Signup" (click)="registerUser()">
+      </form>
+      <div class="signup">
+        <span class="signup">Already have an account?
+         <label for="check">Login</label>
+        </span>
+      </div>
+    </div>
+  </div>
+  <app-ajax-loader *ngIf="isLoadingComplete"></app-ajax-loader>
+  <p-toast></p-toast>

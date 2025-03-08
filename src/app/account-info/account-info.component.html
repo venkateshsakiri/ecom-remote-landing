@@ -1,0 +1,59 @@
+<form [formGroup]="accountInfoForm">
+    <div class="card">
+        <span class="text-900 text-xl font-bold mb-4 block">Update User</span>
+        <div class="grid">
+            <div class="col-12 lg:col-2">
+                <div class="text-900 font-medium text-xl mb-3">Profile</div>
+                <!-- <p class="m-0 p-0 text-600 line-height-3 mr-3"> Odio euismod lacinia at quis risus sed vulputate odio. </p> -->
+            </div>
+
+                <div class="col-12 lg:col-10">
+                    <div class="grid formgrid p-fluid">
+                        <div class="field mb-4 col-12"><label for="nickname" class="font-medium text-900">Name</label><input
+                                id="nickname" type="text" pinputtext="" formControlName="name" class="p-inputtext p-component p-element"></div>
+                        <div class="field mb-4 col-12"><label for="avatar" class="font-medium text-900">Avatar</label>
+                            <p-fileupload mode="basic" name="avatar" accept="image/*" (onSelect)="onSelect($event)"
+                                styleClass="p-button-outlined p-button-plain" chooseLabel="Upload Image" class="p-element">
+
+                                <div class="p-fileupload p-fileupload-basic p-component"
+                                    data-pc-name="fileupload">
+                                    <p-messages class="p-element">
+                                        <div role="alert" class="p-messages p-component"
+                                            aria-atomic="true" aria-live="assertive" data-pc-name="message">
+                                        </div>
+                                    </p-messages><span tabindex="0" pripple=""
+                                        class="p-ripple p-element p-button-outlined p-button-plain p-button p-component p-fileupload-choose"
+                                        data-pc-section="choosebutton">
+                                        <span class="pi pi-plus"></span>
+                                        <span class="p-button-label " data-pc-section="label">Upload
+                                            Image</span>
+                                        <input type="file" accept="image/*" data-pc-section="input" (change)="onSelect($event)" >
+                                        <span class="p-ink" aria-hidden="true" role="presentation"></span>
+                                    </span>
+                                </div>
+
+                            </p-fileupload>
+                        </div>
+                        <div class="field mb-4 col-12"><label for="bio" class="font-medium text-900">Bio</label><textarea
+                                id="bio" type="text" pinputtextarea="" formControlName="bio" rows="5"
+                                class="p-inputtextarea p-inputtext p-component p-element p-inputtextarea-resizable"
+                                style="height: 109px; overflow: hidden;"></textarea></div>
+                        <div class="field mb-4 col-12 md:col-6"><label for="email"
+                                class="font-medium text-900">Email</label><input id="email" formControlName="email" type="text" pinputtext=""
+                                class="p-inputtext p-component p-element"></div>
+                        <div class="field mb-4 col-12 md:col-6"><label for="city"
+                                class="font-medium text-900">City</label><input id="city" formControlName="city" type="text" pinputtext=""
+                                class="p-inputtext p-component p-element"></div>
+                        <div class="field mb-4 col-12 md:col-6"><label for="state"
+                                class="font-medium text-900">State</label><input id="state" formControlName="state" type="text" pinputtext=""
+                                class="p-inputtext p-component p-element"></div>
+                        <div class="col-12"><button pbutton="" pripple="" label="Create User" (click)="updateUser()"
+                                class="p-element p-ripple w-auto mt-3 p-button p-component"><span class="p-button-label">Update
+                                    User</span><span class="p-ink" aria-hidden="true" role="presentation"></span></button></div>
+                    </div>
+                </div>
+        </div>
+    </div>
+</form>
+<app-ajax-loader *ngIf="isLoadingComplete"></app-ajax-loader>
+

@@ -1,0 +1,87 @@
+<div class="grid topbar-item">
+    <div class="col-3">
+        <span class="p-input-icon-left">
+            <i class="pi pi-search"></i>
+            <input type="text" pInputText placeholder="Search" />
+        </span>
+    </div>
+    <div class="col-9" style="text-align: right;">
+        <p-button label="Create Account" (click)="showDialog()"></p-button>
+    </div>
+
+</div>
+<!-- <p-button (click)="showDialog()" icon="pi pi-external-link" label="Show"></p-button> -->
+<p-dialog header="Create Account" [(visible)]="visible" [style]="{width: '50vw'}">
+    <form [formGroup]="accountForm">
+        <span class="p-float-label mt-5">
+            <input pInputText id="username" formControlName="accountName" />
+            <label for="username">Account Name</label>
+        </span>
+        <span class="p-float-label mt-5">
+            <input pInputText id="username" formControlName="accountType" />
+            <label for="username">Account Type</label>
+        </span>
+        <span class="p-float-label mt-5">
+            <input pInputText id="username" formControlName="address" />
+            <label for="username">Address</label>
+        </span>
+        <span class="p-float-label mt-5">
+            <input pInputText id="username" formControlName="email" />
+            <label for="username">Email</label>
+        </span>
+        <button pButton pRipple label="Clear" (click)="ClearAccountForm()" class="p-button-danger mr-3 mt-3"></button>
+        <button pButton pRipple label="Submit" (click)="saveAccountForm()" class="p-button-success mt-3"></button>
+    </form>
+
+</p-dialog>
+
+<p-table
+    #myTab
+    [value]="users"
+    [scrollable]="true"
+    scrollHeight="600px"
+    [paginator]="true"
+    [rows]="5"
+    [showCurrentPageReport]="true"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    [rowsPerPageOptions]="[5, 10, 20]"
+    (sortFunction)="customSort($event)" [customSort]="true"
+>
+    <ng-template pTemplate="header">
+        <tr>
+            <!-- <th *ngFor="let col of cols" > -->
+                <!-- {{ col.header }} -->
+                <th pSortableColumn="id" >S.no <p-sortIcon field="id"></p-sortIcon></th>
+                <th pSortableColumn="accountName" >Account Name <p-sortIcon field="accountName"></p-sortIcon></th>
+                <th pSortableColumn="accountType" >Account Type <p-sortIcon field="accountType"></p-sortIcon></th>
+                <th pSortableColumn="address" >Address <p-sortIcon field="address"></p-sortIcon></th>
+                <th pSortableColumn="email" >Email <p-sortIcon field="email"></p-sortIcon></th>
+            <!-- </th> -->
+        </tr>
+        <p-progressBar mode="indeterminate" *ngIf="!users" [style]="{ height: '4px' }"></p-progressBar>
+    </ng-template>
+
+
+    <ng-template pTemplate="body" let-people>
+        <tr>
+            <td>
+                {{ people.id }}
+            </td>
+            <td>
+                {{ people.accountName }}
+            </td>
+            <td>
+                {{ people.accountType }}
+            </td>
+            <td>
+                {{ people.address }}
+            </td>
+            <td >
+                <!-- <span [class]="'product-badge status-'">{{ people.JobStatus }}</span> -->
+                {{ people.email }}
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
+<app-ajax-loader *ngIf="isLoadingComplete"></app-ajax-loader>
+<p-toast></p-toast>

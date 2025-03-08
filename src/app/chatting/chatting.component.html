@@ -1,0 +1,102 @@
+<div class="flex flex-column md:flex-row gap-5" style="min-height: 81vh;">
+    <div class="md:w-25rem card p-0">
+        <!-- <app-chat-sidebar> -->
+            <div class="flex flex-column align-items-center border-bottom-1 surface-border p-3"><img
+                    [src]="userInfo?.avatar? getImageSrc(userInfo?.avatar) : 'assets/demo/images/avatar/user.png'" alt=""
+                    class="w-6rem h-6rem border-circle shadow-4"><span class="text-900 text-xl font-semibold mt-4">{{userInfo?.name}}</span></div>
+            <div class="w-full flex row-gap-4 flex-column surface-border p-4"><span class="p-input-icon-left w-full"><i
+                        class="pi pi-search"></i><input id="search" type="text" pinputtext="" placeholder="Search"
+                        class="p-inputtext p-component p-element w-full ng-untouched ng-pristine ng-valid"></span>
+                <div class="flex flex-row gap-4 md:flex-column overflow-auto">
+                    <app-user-card class="" *ngFor="let user of usersList;">
+                        <div tabindex="0" class="flex flex-nowrap justify-content-between align-items-center border-1 surface-border border-round p-3 cursor-pointer select-none hover:surface-hover transition-colors transition-duration-150" (click)="selectedUsers(user)">
+                            <div class="flex align-items-center">
+                                <div class="relative md:mr-3"><img alt="user"
+                                        class="w-3rem h-3rem border-circle shadow-4"
+                                        [src]="user?.avatar? getImageSrc(user?.avatar) : 'assets/demo/images/avatar/user.png'"><span
+                                        class="w-1rem h-1rem border-circle border-2 surface-border absolute " [ngClass]="user?.isActive? 'bg-green-400' : 'bg-yellow-400'"
+                                        style="bottom: 2px; right: 2px;"></span></div>
+                                <div class="flex-column hidden md:flex"><span class="text-900 font-semibold block">{{user?.name}}</span><span
+                                        class="block text-600 text-overflow-ellipsis overflow-hidden white-space-nowrap w-10rem text-sm">Sed
+                                        do eiusmod tempor incididunt ut labore et dolore magna aliqua</span></div>
+                        </div><span *ngIf="user?.count >0"> <i class="pi" pBadge  severity="success" value="{{user?.count}}"></i></span>
+                        </div>
+                    </app-user-card>
+
+
+                </div>
+            </div>
+        <!-- </app-chat-sidebar> -->
+    </div>
+    <div class="flex-1 card p-0">
+            <div class="flex flex-column h-full">
+                <div class="flex align-items-center border-bottom-1 surface-border p-3 lg:p-3">
+                    <div class="relative flex align-items-center mr-3"><img alt="user.name"
+                            class="w-4rem h-4rem border-circle shadow-4"
+                            [src]="selectedUser?.avatar?getImageSrc(selectedUser?.avatar) : 'assets/demo/images/avatar/user.png'"><span
+                            class="w-1rem h-1rem border-circle border-2 surface-border absolute bottom-0 right-0" [ngClass]="selectedUser?.isActive? 'bg-green-400' : 'bg-yellow-400'"></span>
+                    </div>
+                    <div class="mr-2"><span class="text-900 font-semibold block">{{selectedUser?.name}}</span><span
+                            class="text-700">Last active 1 hour ago</span></div>
+                    <div class="flex align-items-center ml-auto"><button pbutton="" pripple="" type="button"
+                            icon="pi pi-phone"
+                            class="p-element p-ripple p-button-rounded p-button-outlined p-button-secondary mr-3 p-button p-component p-button-icon-only"><span
+                                class="p-button-icon pi pi-phone" aria-hidden="true"></span><span class="p-ink"
+                                aria-hidden="true" role="presentation"
+                                style="height: 33px; width: 33px; top: -6px; left: 2.46875px;"></span></button><button
+                            pbutton="" pripple="" type="button" icon="pi pi-ellipsis-v"
+                            class="p-element p-ripple p-button-rounded p-button-outlined p-button-secondary p-button p-component p-button-icon-only"><span
+                                class="p-button-icon pi pi-ellipsis-v" aria-hidden="true"></span><span class="p-ink"
+                                aria-hidden="true" role="presentation"
+                                style="height: 33px; width: 33px; top: -11px; left: 5.48438px;"></span></button></div>
+                </div>
+                <div class="p-3 md:px-4 lg:px-3 lg:py-4 mt-2 overflow-y-auto" style="max-height: 79vh;" #chatContainer>
+                    <ng-container *ngFor="let message of messageList;">
+                        <div class="" *ngIf="((userInfo?.id !== message.senderId) &&( message?.senderId === selectedUser?._id))">
+                            <div class="grid grid-nogutter mb-4 ">
+                                <div class="mt-1 mr-3"><img alt="user.name" class="w-3rem h-3rem border-circle shadow-4"
+                                    [src]="selectedUser?.avatar?getImageSrc(selectedUser?.avatar) : 'assets/demo/images/avatar/user.png'"></div>
+                                <div class="col mt-3">
+                                    <p class="text-900 font-semibold mb-3">{{selectedUser?.name}}</p><span
+                                        class="text-700 inline-block font-medium border-1 surface-border p-3 white-space-normal border-round"
+                                        style="word-break: break-word; max-width: 80%;">{{message?.text}}</span>
+                                    <p class="text-700 mt-3">{{message?.createdAt? updateDateFormat(message?.createdAt) :''}}<i class="pi pi-check text-green-400 ml-2"></i></p>
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <div class="" *ngIf="userInfo?.id === message.senderId">
+
+                            <div class="grid grid-nogutter mb-4 ">
+                                <div class="col mt-3 text-right">
+                                    <p class="text-900 font-semibold mb-3">You</p>
+                                    <span class="inline-block text-left font-medium border-1 surface-border bg-primary-100 text-primary-900 p-3 white-space-normal border-round"
+                                        style="word-break: break-word; max-width: 80%;">{{message?.text}}</span>
+                                    <p class="text-700 mt-3">{{message?.createdAt? updateDateFormat(message?.createdAt) :''}} <i class="pi pi-check text-green-400 mr-3"></i></p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </ng-container>
+                </div>
+                <div
+                    class="p-3 md:p-4 lg:p-4 flex flex-column sm:flex-row align-items-center mt-auto border-top-1 surface-border gap-3">
+                    <input id="message" type="text" pinputtext="" [(ngModel)]="message" placeholder="Type a message"
+                        class="p-inputtext p-component p-element flex-1 w-full sm:w-auto border-round">
+                    <div class="flex w-full sm:w-auto gap-3"><button pripple=""
+                            class="p-ripple p-element p-button p-button-secondary w-full sm:w-auto justify-content-center text-xl">
+                            <i class="pi pi-image"></i>
+                        </button>
+                            <button pbutton="" [disabled]="!(message || selectedImage)"
+                            pripple="" label="Send" icon="pi pi-send" (click)="sendMessages()"
+                            class="p-element p-ripple w-full sm:w-auto p-button p-component"><span
+                                class="p-button-icon p-button-icon-left pi pi-send" aria-hidden="true"></span><span
+                                class="p-button-label">Send</span><span class="p-ink" aria-hidden="true"
+                                role="presentation"></span></button>
+                    </div>
+                </div>
+            </div>
+
+    </div>
+</div>

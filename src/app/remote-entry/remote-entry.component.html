@@ -1,0 +1,61 @@
+<div class="header">
+    <nav class="nav">
+      <div class="logo">EcoShop</div>
+      <div class="nav-links">
+        <a href="#" class="btn">Shop Now</a>
+      </div>
+    </nav>
+  </div>
+
+  <div class="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item">
+        <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8" alt="Shop now">
+        <div class="carousel-content">
+          <h1>Summer Collection 2025</h1>
+          <p>Discover amazing deals on trending products</p>
+          <a href="#" class="btn">Shop Now</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="products">
+    <h2 class="section-title">Featured Products</h2>
+    <div class="product-grid">
+      <div class="product-card" *ngFor="let product of products">
+        <img [src]="product.image" [alt]="product.name" class="product-image">
+        <div class="product-info">
+          <h3 class="product-title">{{product.name}}</h3>
+          <p class="product-price">\${{product.price}}</p>
+          <button class="btn">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="features">
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">🚚</div>
+        <h3>Free Shipping</h3>
+        <p>On orders over $50</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">⚡</div>
+        <h3>Fast Delivery</h3>
+        <p>Within 24 hours</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">💎</div>
+        <h3>Best Quality</h3>
+        <p>Guaranteed products</p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <p>&copy; 2025 EcoShop. All rights reserved.</p>
+    </div>
+  </footer>

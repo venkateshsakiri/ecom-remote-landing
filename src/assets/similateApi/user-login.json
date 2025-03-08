@@ -1,0 +1,12 @@
+{
+    "applicationType": "CHAT",
+    "message": "logged in Successfully!",
+    "status": "SUCCESS",
+    "user": {
+        "UserRole": "ADMIN",
+        "email": "admin@gmail.com",
+        "id": "6762a254ed4f8a19126b1e94",
+        "password": "123456",
+        "name": "admin"
+    }
+}
