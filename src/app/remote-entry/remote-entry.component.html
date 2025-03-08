@@ -2,7 +2,7 @@
     <nav class="nav">
       <div class="logo">EcoShop</div>
       <div class="nav-links">
-        <a href="#" class="btn">Shop Now</a>
+        <button (click)="sendEvent()" class="btn">Shop Now</button>
       </div>
     </nav>
   </div>
@@ -14,7 +14,7 @@
         <div class="carousel-content">
           <h1>Summer Collection 2025</h1>
           <p>Discover amazing deals on trending products</p>
-          <a href="#" class="btn">Shop Now</a>
+          <button (click)="sendEvent()" class="btn">Shop Now</button>
         </div>
       </div>
     </div>
@@ -28,7 +28,7 @@
         <div class="product-info">
           <h3 class="product-title">{{product.name}}</h3>
           <p class="product-price">\${{product.price}}</p>
-          <button class="btn">Add to Cart</button>
+          <button (click)="sendEvent()" class="btn">Add to Cart</button>
         </div>
       </div>
     </div>

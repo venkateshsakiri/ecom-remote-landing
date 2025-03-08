@@ -28,4 +28,9 @@ export class RemoteEntryComponent {
       image: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62'
     }
   ];
+
+  sendEvent() {
+    const event = new CustomEvent('remoteButtonClick', { detail: { message: 'Hello from Remote App' } });
+    window.dispatchEvent(event);
+  }
 }
