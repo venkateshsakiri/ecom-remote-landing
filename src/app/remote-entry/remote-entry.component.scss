@@ -55,7 +55,9 @@ body {
   gap: 2rem;
   align-items: center;
 }
-
+.mobile-login{
+  display: none;
+}
 .nav-links a {
   text-decoration: none;
   color: var(--text-color);
@@ -302,6 +304,9 @@ body {
 @media (max-width: 768px) {
   .navbar {
     padding: 1rem;
+  }
+  .mobile-login{
+    display: block;
   }
 
   .nav-links {
